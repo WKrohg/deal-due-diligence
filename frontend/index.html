@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deal Screener</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Deal Screener</h1>
+      <p class="subtitle">Paste a business listing. Get a call or pass in seconds.</p>
+    </header>
+
+    <main>
+      <!-- Input -->
+      <section class="input-section">
+        <textarea
+          id="listing-input"
+          placeholder="Paste a BizBuySell listing here..."
+          rows="12"
+        ></textarea>
+        <button id="screen-btn" onclick="screenDeal()">Screen This Deal</button>
+      </section>
+
+      <!-- Loading -->
+      <section id="loading" class="hidden">
+        <div class="spinner"></div>
+        <p>Extracting financials and evaluating deal…</p>
+      </section>
+
+      <!-- Results -->
+      <section id="results" class="hidden">
+
+        <div id="verdict-banner" class="verdict-banner">
+          <span id="verdict-text"></span>
+        </div>
+
+        <div class="cards">
+          <div class="card">
+            <h3>Reasoning</h3>
+            <p id="reasoning"></p>
+          </div>
+
+          <div class="card" id="hard-fails-card">
+            <h3>Hard Fails</h3>
+            <ul id="hard-fails"></ul>
+          </div>
+
+          <div class="card" id="soft-flags-card">
+            <h3>Soft Flags</h3>
+            <ul id="soft-flags"></ul>
+          </div>
+
+          <div class="card questions-card">
+            <h3>Top 3 Seller Questions</h3>
+            <ol id="top-questions"></ol>
+          </div>
+        </div>
+
+        <button class="reset-btn" onclick="reset()">Screen Another Deal</button>
+      </section>
+
+      <!-- Error -->
+      <section id="error-section" class="hidden">
+        <p id="error-msg" class="error-msg"></p>
+        <button class="reset-btn" onclick="reset()">Try Again</button>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

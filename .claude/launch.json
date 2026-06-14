@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "frontend",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "serve", "frontend", "-p", "3000", "--no-clipboard"],
+      "port": 3000
+    },
+    {
+      "name": "api",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "uvicorn", "api:app", "--reload", "--port", "8000"],
+      "port": 8000
+    }
+  ]
+}
