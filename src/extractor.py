@@ -1,42 +1,10 @@
 import json
 import os
-from typing import Optional
 from dotenv import load_dotenv
 import anthropic
-from pydantic import BaseModel, Field
+from models import DealFinancials
 
 load_dotenv()
-
-
-class DealFinancials(BaseModel):
-    # Listing basics
-    business_name: Optional[str] = None
-    industry: Optional[str] = None
-    location: Optional[str] = None
-    years_in_business: Optional[int] = None
-
-    # Pricing
-    asking_price: Optional[float] = None
-    down_payment: Optional[float] = None
-
-    # Income
-    annual_revenue: Optional[float] = None
-    sde: Optional[float] = None          # Seller's Discretionary Earnings
-    ebitda: Optional[float] = None
-
-    # Derived / stated metrics
-    gross_margin_pct: Optional[float] = None
-    revenue_trend: Optional[str] = None  # "growing", "stable", "declining", "unknown"
-    multiple: Optional[float] = None     # asking price / SDE or EBITDA
-
-    # Deal structure hints
-    real_estate_included: Optional[bool] = None
-    inventory_value: Optional[float] = None
-    owner_hours_per_week: Optional[int] = None
-    reason_for_sale: Optional[str] = None
-
-    # Raw notes that don't fit above fields
-    extraction_notes: Optional[str] = None
 
 
 SYSTEM_PROMPT = """You are a business acquisition analyst. Your job is to extract structured financial

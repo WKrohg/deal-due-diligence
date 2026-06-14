@@ -1,8 +1,6 @@
 import os
-from dataclasses import dataclass, field
-from typing import Literal
 import yaml
-from extractor import DealFinancials
+from models import DealFinancials, RuleResult, EvaluationResult
 
 RULES_PATH = os.path.join(os.path.dirname(__file__), "..", "rules", "diligence_rules.yaml")
 
@@ -16,27 +14,6 @@ OPERATORS = {
     "in":      lambda a, b: a in b,
     "not_in":  lambda a, b: a not in b,
 }
-
-
-@dataclass
-class RuleResult:
-    id: str
-    label: str
-    passed: bool
-    weight: Literal["hard", "soft"]
-    fail_reason: str = ""
-
-
-@dataclass
-class EvaluationResult:
-    verdict: Literal["CALL", "PASS"]
-    hard_fails: list[RuleResult] = field(default_factory=list)
-    soft_fails: list[RuleResult] = field(default_factory=list)
-    passes: list[RuleResult] = field(default_factory=list)
-
-    @property
-    def all_results(self) -> list[RuleResult]:
-        return self.hard_fails + self.soft_fails + self.passes
 
 
 def _load_rules() -> list[dict]:
