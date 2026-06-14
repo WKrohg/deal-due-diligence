@@ -1,0 +1,53 @@
+# Deal Diligence Rules
+# Each rule has: field, operator, value, weight, and a label/reason for the output.
+# Operators: gte, lte, gt, lt, eq, neq, in, not_in
+# Weight: "hard" = instant pass if fails | "soft" = noted but not disqualifying
+
+rules:
+  - id: min_sde
+    label: Minimum SDE
+    field: sde
+    operator: gte
+    value: 100000
+    weight: hard
+    fail_reason: "SDE below $100K — not enough cash flow to service debt and pay an operator."
+
+  - id: max_multiple
+    label: Maximum SDE Multiple
+    field: multiple
+    operator: lte
+    value: 4.0
+    weight: hard
+    fail_reason: "Multiple above 4x — price is too rich relative to earnings."
+
+  - id: min_years
+    label: Minimum Years in Business
+    field: years_in_business
+    operator: gte
+    value: 3
+    weight: hard
+    fail_reason: "Business under 3 years old — insufficient track record."
+
+  - id: revenue_trend
+    label: Revenue Not Declining
+    field: revenue_trend
+    operator: neq
+    value: declining
+    weight: soft
+    fail_reason: "Revenue trend is declining — needs explanation from seller."
+
+  - id: max_owner_hours
+    label: Owner Hours Per Week
+    field: owner_hours_per_week
+    operator: lte
+    value: 50
+    weight: soft
+    fail_reason: "Owner working 50+ hours/week — may be hard to replace or indicates operator dependency."
+
+  - id: min_revenue
+    label: Minimum Annual Revenue
+    field: annual_revenue
+    operator: gte
+    value: 500000
+    weight: soft
+    fail_reason: "Revenue under $500K — limited scale and harder to finance."
